@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,61 +5,51 @@ namespace SalesTax
 {
     public class Sale
     {
-        private List<SaleLine> saleLines;
-        private decimal totalTax;
-        private decimal totalValue;
+        private List<SaleLine> _saleLines;
 
-        /// <summary>
-        /// Adds a line to the sale.
-        /// </summary>
-        /// <param name="inputLine">The line to add.</param>
-        /// <returns>True for success, False for failure.  Failures are usually caused via incorrect formatting of the input</returns>
-        public bool Add(string inputLine)
+	    /// <summary>
+	    /// The total Tax amount for the sale
+	    /// </summary>
+	    public decimal Tax { get; private set; }
+
+	    /// <summary>
+	    /// The total value of the sale (including Tax)
+	    /// </summary>
+	    public decimal TotalValue { get; private set; }
+
+		/// <summary>
+		/// Adds a line to the sale.
+		/// </summary>
+		/// <param name="inputLine">The line to add.</param>
+		/// <returns>True for success, False for failure.  Failures are usually caused via incorrect formatting of the input</returns>
+		public bool Add(string inputLine)
         {
-            SaleLine saleLine;
-
-            saleLine = InputParser.ProcessInput(inputLine);
-            saleLines.Add(saleLine);
-            totalTax += saleLine.Tax;
-            totalValue += saleLine.LineValue;
+	        SaleLine saleLine = InputParser.ProcessInput(inputLine);
+            _saleLines.Add(saleLine);
+            Tax += saleLine.Tax;
+            TotalValue += saleLine.LineValue;
             return true;
         }
-
-        /// <summary>
-        /// The total Tax amount for the sale
-        /// </summary>
-        public decimal Tax
-        {
-            get { return totalTax; }
-        }
-
-        /// <summary>
-        /// The total value of the sale (including Tax)
-        /// </summary>
-        public decimal TotalValue
-        {
-            get { return totalValue; }
-        }
-
-        /// <summary>
-        /// Converts the sale to a string
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
+		
+		/// <summary>
+		/// Converts the sale to a string
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
         {
             StringBuilder output = new StringBuilder();
 
-            foreach (SaleLine line in saleLines)
+            foreach (SaleLine line in _saleLines)
             {
                 if (output.Length > 0)
                     output.Append("\n");
-                output.Append(line.ToString());
+                output.Append(line);
             }
             //Now add footer information
             output.Append("\n");
-            output.AppendFormat("Sales Taxes: {0:#,##0.00}", Tax);
+            output.Append($"Sales Taxes: {Tax:#,##0.00}");
             output.Append("\n");
-            output.AppendFormat("Total: {0:#,##0.00}", TotalValue);
+            output.Append($"Total: {TotalValue:#,##0.00}");
             return output.ToString();
         }
     }

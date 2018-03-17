@@ -1,21 +1,15 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using SalesTax;
 
 namespace SalesPrompter
 {
-    class Program
+	internal class Program
     {
-
-        static void Main(string[] args)
+	    private static void Main()
         {
-            Sale sale;
-            string input;
-
-            sale = new Sale();
+	        Sale sale = new Sale();
             Console.WriteLine("Enter sales in the format <qty> <description> at <unit price>\nFor example: 2 books at 13.25\nEntering a blank line completes the sale\n");
-            input = GetInput();
+            string input = GetInput();
             while (!string.IsNullOrEmpty(input))
             {
                 if (!sale.Add(input))
@@ -27,7 +21,7 @@ namespace SalesPrompter
             Console.ReadLine();
         }
 
-        static string GetInput()
+	    private static string GetInput()
         {
             string result;
             Console.Write("Sale : ");

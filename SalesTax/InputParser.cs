@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SalesTax
 {
@@ -18,12 +16,9 @@ namespace SalesTax
         public static SaleLine ProcessInput(string input)
         {
             int quantity;
-            string productName;
-            decimal price;
-            bool isImported;
-            SaleLine saleLine;
+	        decimal price;
 
-            if (string.IsNullOrEmpty(input))
+	        if (string.IsNullOrEmpty(input))
                 return null;
             string[] words = input.Split(' ');
             int wordCount = words.Length;
@@ -46,7 +41,6 @@ namespace SalesTax
                 return null;
             }
 
-
             // get price (last word in input string)
             try
             {
@@ -61,22 +55,21 @@ namespace SalesTax
                 return null;
             }
 
-            productName = string.Join(" ", words, 1, wordCount);
+            string productName = string.Join(" ", words, 1, wordCount);
             if (string.IsNullOrEmpty(productName))
                 return null;
 
             //Check if this is an imported product
-            isImported = productName.Contains("imported ");
+            bool isImported = productName.Contains("imported ");
             if (isImported)
             {
                 //Ensure the word imported appears at the front of the description
-                productName = "imported " + productName.Replace("imported ", string.Empty);
+                productName = $"imported {productName.Replace("imported ", string.Empty)}";
             }
 
             // create the sale line
-            saleLine = new SaleLine(quantity, productName, price, isImported);
+            SaleLine saleLine = new SaleLine(quantity, productName, price, isImported);
             return saleLine;
         }
-
     }
 }
