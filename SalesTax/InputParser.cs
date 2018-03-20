@@ -24,7 +24,7 @@ namespace SalesTax
             int wordCount = words.Length;
 
             // must have at least 4 words
-            if (wordCount > 4)
+            if (wordCount < 4)
                 return null;
 
             // get quantity (first word)
@@ -55,7 +55,7 @@ namespace SalesTax
                 return null;
             }
 
-            string productName = string.Join(" ", words, 1, wordCount);
+            string productName = string.Join(" ", words, 1, Array.IndexOf(words, "at") - 1);
             if (string.IsNullOrEmpty(productName))
                 return null;
 

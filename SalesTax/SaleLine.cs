@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SalesTax
 {
@@ -33,13 +35,21 @@ namespace SalesTax
 
             // calculate taxable amount
             // ideally should really have a product list and tax rules, but this'll have to do for the exercise.
-            if (ProductName.Contains("book") || ProductName.Contains("tablet") || ProductName.Contains("chip"))
+			List<string> taxFreeItems = new List<string>
+			{
+				"book",
+				"tablet",
+				"chip",
+				"chocolate"
+			};
+
+            if (taxFreeItems.Any(t => ProductName.Contains(t)))
                 taxRate = 0;  //No base tax applicable for books, medicals items or food
             else
                 taxRate = 10; //10% base tax or general products
 
             if (IsImported)
-                taxRate = 5; //5% regardless for any imported items
+                taxRate += 5; // Extra 5% regardless for any imported items
 
             Tax = CalculateTax(LineValue,taxRate);
             //Add tax to line value
@@ -69,7 +79,7 @@ namespace SalesTax
         /// <returns>The string representation of the sale line</returns>
         public override string ToString()
         {
-            return $"{Quantity} {ProductName}: {LineValue:#,###.00}";
+            return $"{Quantity} {ProductName}: {LineValue:#,##0.00}";
         }
     }
 }

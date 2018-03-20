@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesTax", "SalesTax\SalesT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesPrompter", "SalesPrompter\SalesPrompter.csproj", "{789A682B-57A6-49FB-AE7B-AF5DBC97579C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesTaxTests", "SalesTaxTests\SalesTaxTests.csproj", "{F8D29B8A-3ADC-489E-A671-C4893EFCEF83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{789A682B-57A6-49FB-AE7B-AF5DBC97579C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{789A682B-57A6-49FB-AE7B-AF5DBC97579C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{789A682B-57A6-49FB-AE7B-AF5DBC97579C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8D29B8A-3ADC-489E-A671-C4893EFCEF83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D29B8A-3ADC-489E-A671-C4893EFCEF83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D29B8A-3ADC-489E-A671-C4893EFCEF83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D29B8A-3ADC-489E-A671-C4893EFCEF83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

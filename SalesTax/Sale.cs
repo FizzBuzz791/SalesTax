@@ -5,7 +5,7 @@ namespace SalesTax
 {
     public class Sale
     {
-        private List<SaleLine> _saleLines;
+        private readonly List<SaleLine> _saleLines = new List<SaleLine>();
 
 	    /// <summary>
 	    /// The total Tax amount for the sale
@@ -25,10 +25,15 @@ namespace SalesTax
 		public bool Add(string inputLine)
         {
 	        SaleLine saleLine = InputParser.ProcessInput(inputLine);
-            _saleLines.Add(saleLine);
-            Tax += saleLine.Tax;
-            TotalValue += saleLine.LineValue;
-            return true;
+	        if (saleLine != null)
+	        {
+		        _saleLines.Add(saleLine);
+		        Tax += saleLine.Tax;
+		        TotalValue += saleLine.LineValue;
+		        return true;
+	        }
+
+	        return false;
         }
 		
 		/// <summary>
