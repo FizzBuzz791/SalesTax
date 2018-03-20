@@ -45,7 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicPrinter.cs" />
     <Compile Include="InputParser.cs" />
+    <Compile Include="IPrinter.cs" />
     <Compile Include="SaleLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sale.cs" />
