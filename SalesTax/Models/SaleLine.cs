@@ -50,8 +50,6 @@ namespace SalesTax.Models
 				taxRate += 5; // Extra 5% regardless for any imported items
 
 			Tax = CalculateTax(LineValue,taxRate);
-			// Add tax to line value
-			LineValue += Tax;
 		}
 
 		/// <summary>
@@ -62,13 +60,7 @@ namespace SalesTax.Models
 		/// <returns>The calculated tax on the original value</returns>
 		public static decimal CalculateTax(decimal value, int taxRate)
 		{
-			double amount = (double) Math.Round(value * taxRate / 100, 2);
-
-			//Now round up to nearest 5 cents.
-			double remainder = amount % .05;
-			if (remainder > 0)
-				amount += .05 - remainder;
-			return (decimal)amount;
+			return Math.Round(value * taxRate / 100, 2);
 		}
 
 		/// <summary>
@@ -77,7 +69,7 @@ namespace SalesTax.Models
 		/// <returns>The string representation of the sale line</returns>
 		public override string ToString()
 		{
-			return $"{Quantity} {ProductName}: {LineValue:#,##0.00}";
+			return $"{Quantity} {ProductName}: {LineValue+Tax:#,##0.00}";
 		}
 	}
 }

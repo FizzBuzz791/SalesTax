@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SalesTax.Models
 {
@@ -9,12 +10,28 @@ namespace SalesTax.Models
 		/// <summary>
 		/// The total Tax amount for the sale
 		/// </summary>
-		public decimal Tax { get; private set; }
+		public decimal Tax
+		{
+			get { return SaleLines.Sum(s => s.Tax); }
+		}
 
 		/// <summary>
 		/// The total value of the sale (including Tax)
 		/// </summary>
-		public decimal TotalValue { get; private set; }
+		public decimal TotalValue
+		{
+			get
+			{
+				double total = (double) SaleLines.Sum(s => s.LineValue + s.Tax);
+
+				//Now round up to nearest 5 cents.
+				double remainder = total % .05;
+				if (remainder > 0)
+					total += .05 - remainder;
+
+				return (decimal)total;
+			}
+		}
 
 		public Sale()
 		{
@@ -34,8 +51,6 @@ namespace SalesTax.Models
 			if (saleLine != null)
 			{
 				SaleLines.Add(saleLine);
-				Tax += saleLine.Tax;
-				TotalValue += saleLine.LineValue;
 				success = true;
 			}
 
