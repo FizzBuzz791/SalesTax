@@ -47,8 +47,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SaleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BasicPrinterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

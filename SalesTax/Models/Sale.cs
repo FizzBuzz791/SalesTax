@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using System.Text;
 
-namespace SalesTax
+namespace SalesTax.Models
 {
 	public class Sale
 	{
-		private readonly List<SaleLine> _saleLines = new List<SaleLine>();
+		public List<SaleLine> SaleLines { get; }
 
 		/// <summary>
 		/// The total Tax amount for the sale
@@ -16,6 +15,11 @@ namespace SalesTax
 		/// The total value of the sale (including Tax)
 		/// </summary>
 		public decimal TotalValue { get; private set; }
+
+		public Sale()
+		{
+			SaleLines = new List<SaleLine>();
+		}
 
 		/// <summary>
 		/// Adds a line to the sale.
@@ -29,35 +33,13 @@ namespace SalesTax
 			SaleLine saleLine = InputParser.ProcessInput(inputLine);
 			if (saleLine != null)
 			{
-				_saleLines.Add(saleLine);
+				SaleLines.Add(saleLine);
 				Tax += saleLine.Tax;
 				TotalValue += saleLine.LineValue;
 				success = true;
 			}
 
 			return success;
-		}
-		
-		/// <summary>
-		/// Converts the sale to a string
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString()
-		{
-			StringBuilder output = new StringBuilder();
-
-			foreach (SaleLine line in _saleLines)
-			{
-				if (output.Length > 0)
-					output.Append("\n");
-				output.Append(line);
-			}
-			//Now add footer information
-			output.Append("\n");
-			output.Append($"Sales Taxes: {Tax:#,##0.00}");
-			output.Append("\n");
-			output.Append($"Total: {TotalValue:#,##0.00}");
-			return output.ToString();
 		}
 	}
 }

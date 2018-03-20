@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using SalesTax;
+using SalesTax.Models;
+using SalesTax.Printers;
 
 namespace SalesPrompter
 {

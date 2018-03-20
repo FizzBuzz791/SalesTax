@@ -1,4 +1,6 @@
-﻿namespace SalesTax
+﻿using SalesTax.Models;
+
+namespace SalesTax.Printers
 {
 	public interface IPrinter
 	{
